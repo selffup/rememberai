@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background-start: 255, 255, 255;
+    --background-end: 249, 250, 251;
+    --text-primary: 17, 24, 39;
+    --text-secondary: 107, 114, 128;
+  }
+
+  .dark {
+    --background-start: 17, 24, 39;
+    --background-end: 0, 0, 0;
+    --text-primary: 255, 255, 255;
+    --text-secondary: 156, 163, 175;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black text-gray-900 dark:text-white;
+  }
+}
+
+@keyframes wave-slow {
+  0%, 100% {
+    transform: rotate(45deg) scale(1.5) translate(25%, 25%);
+  }
+  50% {
+    transform: rotate(45deg) scale(1.5) translate(27%, 27%);
+  }
+}
+
+@keyframes wave-fast {
+  0%, 100% {
+    transform: rotate(-45deg) scale(1.5) translate(-25%, -25%);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.5) translate(-27%, -27%);
+  }
+}
+
+.animate-wave-slow {
+  animation: wave-slow 8s ease-in-out infinite;
+}
+
+.animate-wave-fast {
+  animation: wave-fast 6s ease-in-out infinite;
+}
+
+.bg-blur {
+  backdrop-filter: blur(8px);
+}
+
+@layer components {
+  .form-label {
+    @apply block text-sm font-medium text-white;
+  }
+
+  .input-field {
+    @apply appearance-none block w-full px-3 py-2 border border-secondary-400/30 bg-secondary-900/30 text-white rounded-md shadow-sm placeholder-secondary-300/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 backdrop-blur-sm;
+  }
+
+  .btn-primary {
+    @apply py-2 px-4 bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 text-white font-semibold rounded-md shadow-sm hover:from-primary-600 hover:via-secondary-600 hover:to-accent-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300;
+  }
+
+  .error-text {
+    @apply text-primary-400 text-sm mt-1;
+  }
+
+  .valid-text {
+    @apply text-accent-400 text-sm mt-1;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    z-index: 10;
+  }
+
+  .main-content {
+    padding-bottom: 60px;
+  }
+}
