@@ -68,11 +68,11 @@ function App() {
                     <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
                     <Route path="/auth/callback" element={<OAuthCallback />} />
-                    <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+                    <Route path="/home" element={<Home />} />
                     <Route path="/events" element={<ProtectedRoute><Events /></ProtectedRoute>} />
                     <Route path="/notes" element={<ProtectedRoute><Notes /></ProtectedRoute>} />
                     <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-                    <Route path="/" element={<Navigate to="/dashboard" />} />
+                    <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/terms" element={<Terms />} />
                     <Route path="/privacy" element={<Privacy />} />
                 </Routes>

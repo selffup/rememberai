@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../contexts/ThemeContext';
 import FindButton from '../components/common/autopilot';
 
 const Events = () => {
+    const { isDarkMode } = useTheme();
     const [stats, setStats] = useState({
         today: 0,
         upcoming: 0,
@@ -25,8 +27,13 @@ const Events = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-y-auto">
-            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20" />
+        <div className={`min-h-screen overflow-y-auto ${isDarkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100'}`}>
+            <div className="absolute inset-0">
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-black opacity-40 transform rotate-45 scale-150 translate-x-1/4 translate-y-1/4 animate-wave-slow" />
+                <div className="absolute inset-0 bg-gradient-to-l from-black via-gray-800 to-gray-900 opacity-40 transform -rotate-45 scale-150 -translate-x-1/4 -translate-y-1/4 animate-wave-fast" />
+            </div>
+            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-5" />
 
             <main className="relative isolate px-6 pt-14 lg:px-8 transition-all duration-300 md:ml-[16rem] lg:ml-[16rem] pb-20">
                 <div className="mx-auto max-w-7xl py-12 sm:py-16 lg:py-20">
@@ -79,34 +86,47 @@ const Events = () => {
     );
 };
 
-const StatCard = ({ title, mainStat, subStat, icon, color }) => (
-    <motion.div
-        className="relative overflow-hidden rounded-2xl bg-white/5 p-6 backdrop-blur-lg border border-white/10 shadow-xl"
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: "spring", stiffness: 300 }}
-    >
-        <div className="flex items-center gap-4">
-            <div className={`p-2 rounded-xl bg-${color}-500/10`}>
-                {icon}
-            </div>
-            <div>
-                <h3 className="text-base font-semibold leading-7 text-white">{title}</h3>
-                <div className="mt-1 flex items-baseline gap-2">
-                    <motion.p
-                        className="text-3xl font-bold text-white"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1 }}
-                    >
-                        {mainStat}
-                    </motion.p>
-                    <span className="text-sm text-gray-400">{subStat}</span>
+const StatCard = ({ title, mainStat, subStat, icon, color }) => {
+    const { isDarkMode } = useTheme();
+    
+    const getColorClass = (color) => {
+        const colorMap = {
+            indigo: 'bg-indigo-500/10',
+            purple: 'bg-purple-500/10',
+            pink: 'bg-pink-500/10'
+        };
+        return colorMap[color] || 'bg-gray-500/10';
+    };
+    
+    return (
+        <motion.div
+            className={`relative overflow-hidden rounded-2xl ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'} p-6 backdrop-blur-lg border shadow-xl`}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+        >
+            <div className="flex items-center gap-4">
+                <div className={`p-2 rounded-xl ${getColorClass(color)}`}>
+                    {icon}
+                </div>
+                <div>
+                    <h3 className="text-base font-semibold leading-7 text-white">{title}</h3>
+                    <div className="mt-1 flex items-baseline gap-2">
+                        <motion.p
+                            className="text-3xl font-bold text-white"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1 }}
+                        >
+                            {mainStat}
+                        </motion.p>
+                        <span className="text-sm text-gray-400">{subStat}</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div className={`absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-${color}-500 via-${color}-400 to-${color}-600`} />
-    </motion.div>
-);
+            <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#00f2fe] via-[#4facfe] to-[#00f2fe]" />
+        </motion.div>
+    );
+};
 
 const ActionButton = ({ label, icon, primary }) => (
     <motion.button
