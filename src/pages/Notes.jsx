@@ -67,6 +67,7 @@ const Notes = () => {
             setEditingNote(null);
             setFormData({ description: '', category: '', tags: '' });
         } catch (err) {
+            
             setError(`Failed to ${editingNote ? 'update' : 'create'} note`);
         }
     };

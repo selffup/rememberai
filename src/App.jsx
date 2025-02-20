@@ -16,6 +16,7 @@ import Account from './pages/Account';
 import ForgotPassword from './pages/ForgotPassword';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import Camera from './pages/Camera';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -67,6 +68,7 @@ function App() {
                     <Route path="/chat" element={<ProtectedRoute><ChatInterface /></ProtectedRoute>} />
                     <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
+                    <Route path="/camera" element={<ProtectedRoute><Camera /></ProtectedRoute>} />
                     <Route path="/auth/callback" element={<OAuthCallback />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/events" element={<ProtectedRoute><Events /></ProtectedRoute>} />

@@ -1,0 +1,33 @@
+{
+  "name": "RecallAI",
+  "short_name": "RecallAI",
+  "description": "AI-powered presentation and note-taking application",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "vite.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "orientation": "portrait",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "categories": ["productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Chat",
+      "url": "/chat",
+      "description": "Open chat interface"
+    },
+    {
+      "name": "Dashboard",
+      "url": "/dashboard",
+      "description": "View dashboard"
+    }
+  ]
+}
